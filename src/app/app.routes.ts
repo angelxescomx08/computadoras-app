@@ -12,7 +12,14 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'computers',
+        path: 'New',
+        loadComponent: () =>
+          import('./computers/pages/new/new.component').then(
+            (c) => c.NewComponent
+          ),
+      },
+      {
+        path: 'Computers',
         children: [
           {
             path: '',
@@ -22,17 +29,17 @@ export const routes: Routes = [
               ),
           },
           {
-            path: 'new',
-            loadComponent: () =>
-              import('./computers/pages/new/new.component').then(
-                (c) => c.NewComponent
-              ),
-          },
-          {
             path: '**',
             redirectTo: '/computers',
           },
         ],
+      },
+      {
+        path: 'Contact',
+        loadComponent: () =>
+          import('./contact/pages/contact/contact.component').then(
+            (c) => c.ContactComponent
+          ),
       },
       {
         path: '**',
