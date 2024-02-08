@@ -15,6 +15,7 @@ export class ContactService {
     };
     this.clearForm(form);
     this.snackBarService.openSnackBar('Mensaje enviado', 'Aceptar');
+    return data;
   }
 
   clearForm(form: FormGroup) {
