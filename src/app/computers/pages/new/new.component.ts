@@ -32,7 +32,7 @@ import { MainLayoutComponent } from '../../../shared/layouts/MainLayout/MainLayo
 })
 export class NewComponent implements OnInit {
   public form = this.fb.group({
-    price: [null, [Validators.required, Validators.min(0)]],
+    price: [0, [Validators.required, Validators.min(0)]],
     brand: ['', Validators.required],
     storageType: ['', Validators.required],
     storageCapacity: ['', [Validators.required, Validators.minLength(3)]],
