@@ -73,11 +73,18 @@
 
     <div class="grid grid-cols-12 gap-2 mb-4">
       <div class="col-span-6">
-        <button class="w-full" mat-raised-button>Limpiar</button>
+        <button
+          class="w-full"
+          mat-raised-button
+          type="button"
+          (click)="computersService.clearForm(form)"
+        >
+          Limpiar
+        </button>
       </div>
       <div class="col-span-6">
         <button
-          (click)="cancel()"
+          (click)="computersService.cancelAction()"
           class="w-full"
           mat-raised-button
           color="warn"
