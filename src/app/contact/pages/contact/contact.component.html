@@ -1,1 +1,33 @@
-<app-main-layout> </app-main-layout>
+<app-main-layout>
+  <div class="w-full h-full flex justify-center items-center">
+    <form
+      class="bg-white w-96 rounded-md shadow-lg p-3 max-w-full"
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+    >
+      <h2>Contacto</h2>
+
+      <mat-form-field class="w-full">
+        <mat-label>Correo electrónico</mat-label>
+        <input
+          matInput
+          placeholder="name@email.com"
+          type="email"
+          formControlName="email"
+        />
+        @if (form.get('email')?.invalid && form.get('email')?.touched) {
+        <mat-error>El correo electrónico no es valido</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="w-full">
+        <mat-label>Texto</mat-label>
+        <textarea matInput></textarea>
+      </mat-form-field>
+
+      <button class="w-full" mat-raised-button color="primary" type="submit">
+        Enviar
+      </button>
+    </form>
+  </div>
+</app-main-layout>
