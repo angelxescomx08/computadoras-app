@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { NewComponent } from './computers/pages/new/new.component';
-import { HomeComponent } from './home/pages/home/home.component';
 
 export const routes: Routes = [
   {
@@ -8,11 +6,21 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        loadComponent: () => HomeComponent,
+        loadComponent: () =>
+          import('./home/pages/home/home.component').then(
+            (c) => c.HomeComponent
+          ),
       },
       {
         path: 'computers',
         children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./computers/pages/computers/computers.component').then(
+                (c) => c.ComputersComponent
+              ),
+          },
           {
             path: 'new',
             loadComponent: () =>
@@ -20,7 +28,15 @@ export const routes: Routes = [
                 (c) => c.NewComponent
               ),
           },
+          {
+            path: '**',
+            redirectTo: '/computers',
+          },
         ],
+      },
+      {
+        path: '**',
+        redirectTo: '/',
       },
     ],
   },
