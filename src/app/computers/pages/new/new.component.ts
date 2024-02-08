@@ -7,7 +7,6 @@ import {
   signal,
 } from '@angular/core';
 import {
-  FormControl,
   Validators,
   FormsModule,
   ReactiveFormsModule,
@@ -19,6 +18,7 @@ import { ComputersService } from '../../services/computers.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { Computer } from '../../interfaces/computer.interface';
 
 @Component({
   selector: 'app-new',
@@ -37,11 +37,8 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewComponent implements OnInit {
-  public brands: WritableSignal<string[]> = signal([]);
-  public storageTypes: WritableSignal<string[]> = signal([]);
-  public RAMCapacities: WritableSignal<string[]> = signal([]);
   public form = this.fb.group({
-    price: ['', [Validators.required, Validators.min(0)]],
+    price: [null, [Validators.required, Validators.min(0)]],
     brand: ['', Validators.required],
     storageType: ['', Validators.required],
     storageCapacity: ['', [Validators.required, Validators.minLength(3)]],
@@ -49,22 +46,28 @@ export class NewComponent implements OnInit {
   });
 
   constructor(
-    private computersService: ComputersService,
+    public computersService: ComputersService,
     private router: Router,
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {
-    this.brands = this.computersService.getBrands();
-    this.storageTypes = this.computersService.getStorageTypes();
-    this.RAMCapacities = this.computersService.getRAMCapacities();
-  }
+  ngOnInit(): void {}
 
   cancel() {
     this.router.navigate(['/']);
   }
 
   submit() {
-    console.log(this.form.value);
+    if (this.form.invalid) {
+      return;
+    }
+    const computer: Computer = {
+      brand: this.form.value.brand!,
+      price: this.form.value.price!,
+      RAMCapacity: this.form.value.RAMCapacity!,
+      storageCapacity: this.form.value.storageCapacity!,
+      storageType: this.form.value.storageType!,
+    };
+    this.computersService.addComputer(computer);
   }
 }

@@ -24,7 +24,7 @@
         <mat-form-field class="w-full">
           <mat-label>Marca</mat-label>
           <mat-select formControlName="brand">
-            @for (brand of brands(); track brand) {
+            @for (brand of computersService.brands(); track brand) {
             <mat-option [value]="brand">{{ brand }}</mat-option>
             }
           </mat-select>
@@ -35,7 +35,7 @@
         <mat-form-field class="w-full">
           <mat-label>Tipo de almacenamiento</mat-label>
           <mat-select formControlName="storageType">
-            @for (type of storageTypes(); track type) {
+            @for (type of computersService.storageTypes(); track type) {
             <mat-option [value]="type">{{ type }}</mat-option>
             }
           </mat-select>
@@ -62,7 +62,8 @@
         <mat-form-field class="w-full">
           <mat-label>Capacidad de la RAM</mat-label>
           <mat-select formControlName="RAMCapacity">
-            @for (RAMCapacity of RAMCapacities(); track RAMCapacity) {
+            @for (RAMCapacity of computersService.RAMCapacities(); track
+            RAMCapacity) {
             <mat-option [value]="RAMCapacity">{{ RAMCapacity }}</mat-option>
             }
           </mat-select>
