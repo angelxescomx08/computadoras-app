@@ -12,6 +12,7 @@ import { ComputersService } from '../../services/computers.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MainLayoutComponent } from '../../../shared/layouts/MainLayout/MainLayout.component';
+import { SnackBarService } from '../../../shared/services/SnackBar.service';
 
 @Component({
   selector: 'app-new',
@@ -41,7 +42,8 @@ export class NewComponent implements OnInit {
 
   constructor(
     public computersService: ComputersService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {}
@@ -51,6 +53,9 @@ export class NewComponent implements OnInit {
       return;
     }
     const localStorageResult = localStorage.getItem('computers');
-    this.computersService.addComputer(this.form, localStorageResult);
+    const computer = this.computersService.createComputerByFormGroup(this.form);
+    this.computersService.addComputer(computer, localStorageResult);
+    this.computersService.clearForm(this.form);
+    this.snackBarService.openSnackBar('Guardado exitoso.', 'Aceptar');
   }
 }

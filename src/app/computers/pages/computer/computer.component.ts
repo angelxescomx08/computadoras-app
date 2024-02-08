@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  signal,
+} from '@angular/core';
 import {
   Validators,
   FormsModule,
@@ -13,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MainLayoutComponent } from '../../../shared/layouts/MainLayout/MainLayout.component';
 import { ActivatedRoute } from '@angular/router';
+import { SnackBarService } from '../../../shared/services/SnackBar.service';
 
 @Component({
   selector: 'app-computer',
@@ -32,6 +38,8 @@ import { ActivatedRoute } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComputerComponent implements OnInit {
+  id = signal('');
+
   public form = this.fb.group({
     price: [0, [Validators.required, Validators.min(0)]],
     brand: ['', Validators.required],
@@ -43,15 +51,17 @@ export class ComputerComponent implements OnInit {
   constructor(
     public computersService: ComputersService,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      const id = params['id'];
+      const idURL = params['id'];
+      this.id.set(idURL);
       const localStorageResult = localStorage.getItem('computers');
       const computer = this.computersService.getComputerById(
-        id,
+        idURL,
         localStorageResult
       );
       if (computer) {
@@ -71,6 +81,10 @@ export class ComputerComponent implements OnInit {
       return;
     }
     const localStorageResult = localStorage.getItem('computers');
-    this.computersService.addComputer(this.form, localStorageResult);
+    this.computersService.updateComputerById(
+      this.form,
+      this.id(),
+      localStorageResult
+    );
   }
 }
