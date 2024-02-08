@@ -17,6 +17,14 @@ export class ComputersService {
     private snackBarService: SnackBarService
   ) {}
 
+  getComputers(): Computer[] {
+    const computerString = localStorage.getItem('computers');
+    if (!computerString) {
+      return [];
+    }
+    return JSON.parse(computerString);
+  }
+
   createComputerByFormGroup(form: FormGroup): Computer {
     const computer: Computer = {
       brand: form.value.brand!,
