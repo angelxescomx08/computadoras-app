@@ -81,10 +81,13 @@ export class ComputerComponent implements OnInit {
       return;
     }
     const localStorageResult = localStorage.getItem('computers');
+    const computer = this.computersService.createComputerByFormGroup(this.form);
     this.computersService.updateComputerById(
-      this.form,
+      computer,
       this.id(),
       localStorageResult
     );
+    this.computersService.clearForm(this.form);
+    this.snackBarService.openSnackBar('Guardado exitoso.', 'Aceptar');
   }
 }

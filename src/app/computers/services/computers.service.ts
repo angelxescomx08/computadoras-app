@@ -49,15 +49,15 @@ export class ComputersService {
   }
 
   updateComputerById(
-    form: FormGroup,
+    computer: Computer,
     id: string,
     localStorageResult: string | null
   ) {
     const computers = this.getComputersByString(localStorageResult);
-    const computer = this.createComputerByFormGroup(form);
     const newComputers = computers.map((c) => {
       return c.id === id ? computer : c;
     });
+    localStorage.setItem('computers', JSON.stringify(newComputers));
     return newComputers;
   }
 
