@@ -61,8 +61,19 @@ export class ComputersService {
     return newComputers;
   }
 
+  deleteComputerById(id: string, localStorageResult: string | null) {
+    const computers = this.getComputersByString(localStorageResult);
+    const newComputers = computers.filter((c) => c.id !== id);
+    localStorage.setItem('computers', JSON.stringify(newComputers));
+    return newComputers;
+  }
+
   cancelAction() {
     this.router.navigate(['/']);
+  }
+
+  redirectOnDelete() {
+    this.router.navigate(['/Computers']);
   }
 
   clearForm(form: FormGroup) {

@@ -76,6 +76,15 @@ export class ComputerComponent implements OnInit {
     });
   }
 
+  delete() {
+    if (this.form.invalid) {
+      return;
+    }
+    const localStorageResult = localStorage.getItem('computers');
+    this.computersService.deleteComputerById(this.id(), localStorageResult);
+    this.computersService.redirectOnDelete();
+  }
+
   submit() {
     if (this.form.invalid) {
       return;
