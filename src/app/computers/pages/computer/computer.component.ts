@@ -48,6 +48,7 @@ export class ComputerComponent {
     if (this.form.invalid) {
       return;
     }
-    this.computersService.addComputer(this.form);
+    const localStorageResult = localStorage.getItem('computers');
+    this.computersService.addComputer(this.form, localStorageResult);
   }
 }

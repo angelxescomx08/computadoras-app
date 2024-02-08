@@ -17,12 +17,20 @@ export class ComputersService {
     private snackBarService: SnackBarService
   ) {}
 
-  getComputers(): Computer[] {
-    const computerString = localStorage.getItem('computers');
-    if (!computerString) {
+  getComputerById(
+    id: string,
+    localStorageResut: string | null
+  ): Computer | undefined {
+    const computers = this.getComputersByString(localStorageResut);
+    if (computers.length === 0) return;
+    return computers.find((computer) => computer.id === id);
+  }
+
+  getComputersByString(localStorageResut: string | null): Computer[] {
+    if (!localStorageResut) {
       return [];
     }
-    return JSON.parse(computerString);
+    return JSON.parse(localStorageResut);
   }
 
   createComputerByFormGroup(form: FormGroup): Computer {
@@ -37,8 +45,8 @@ export class ComputersService {
     return computer;
   }
 
-  addComputer(form: FormGroup) {
-    const computers = this.getComputers();
+  addComputer(form: FormGroup, localStorageResult: string | null) {
+    const computers = this.getComputersByString(localStorageResult);
     const computer = this.createComputerByFormGroup(form);
     computers.push(computer);
     localStorage.setItem('computers', JSON.stringify(computers));

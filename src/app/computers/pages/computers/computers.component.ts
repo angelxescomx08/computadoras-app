@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  OnInit,
   ViewChild,
   signal,
 } from '@angular/core';
@@ -32,7 +33,7 @@ import { MainLayoutComponent } from '../../../shared/layouts/MainLayout/MainLayo
   styleUrl: './computers.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComputersComponent {
+export class ComputersComponent implements OnInit {
   displayedColumns = signal([
     'price',
     'brand',
@@ -40,9 +41,7 @@ export class ComputersComponent {
     'storageCapacity',
     'RAMCapacity',
   ]);
-  dataSource = new MatTableDataSource<Computer>(
-    this.computersService.getComputers()
-  );
+  dataSource!: MatTableDataSource<Computer, MatPaginator>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -53,6 +52,13 @@ export class ComputersComponent {
     public computersService: ComputersService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    const localStorageResult = localStorage.getItem('computers');
+    this.dataSource = new MatTableDataSource<Computer>(
+      this.computersService.getComputersByString(localStorageResult)
+    );
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
