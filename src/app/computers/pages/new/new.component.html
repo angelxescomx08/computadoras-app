@@ -14,7 +14,7 @@
         type="number"
         formControlName="price"
       />
-      @if (true) {
+      @if (form.get('price')?.invalid && form.get('price')?.touched) {
       <mat-error>El precio es requerido y debe ser mayor que 0</mat-error>
       }
     </mat-form-field>
@@ -53,8 +53,9 @@
             type="text"
             formControlName="storageCapacity"
           />
-          @if (true) {
-          <mat-error>Error</mat-error>
+          @if (form.get('storageCapacity')?.invalid &&
+          form.get('storageCapacity')?.touched) {
+          <mat-error>Ingresa al menos 3 caracteres</mat-error>
           }
         </mat-form-field>
       </div>
