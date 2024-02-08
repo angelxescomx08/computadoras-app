@@ -12,6 +12,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ComputersService } from '../../services/computers.service';
+import { Computer } from '../../interfaces/computer.interface';
 
 @Component({
   selector: 'app-computers',
@@ -36,5 +37,14 @@ export class ComputersComponent {
     'storageCapacity',
     'RAMCapacity',
   ]);
+  dataSource = new MatTableDataSource<Computer>(
+    this.computersService.getComputers()
+  );
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
   constructor(public computersService: ComputersService) {}
 }
