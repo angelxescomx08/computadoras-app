@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ComputersService } from '../../services/computers.service';
 import { Computer } from '../../interfaces/computer.interface';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MainLayoutComponent } from '../../../shared/layouts/MainLayout/MainLayout.component';
 
 @Component({
@@ -26,6 +26,7 @@ import { MainLayoutComponent } from '../../../shared/layouts/MainLayout/MainLayo
     MatSortModule,
     MatPaginatorModule,
     MainLayoutComponent,
+    RouterModule,
   ],
   templateUrl: `./computers.component.html`,
   styleUrl: './computers.component.css',
