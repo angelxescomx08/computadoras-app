@@ -11,7 +11,7 @@ export class ComputersService {
   public storageTypes = signal(['HDD', 'SSD']);
   public RAMCapacities = signal(['8GB', '16GB', '32GB', '64GB']);
 
-  constructor(private router: Router) {}
+  constructor(public router: Router) {}
 
   getComputerById(
     id: string,
