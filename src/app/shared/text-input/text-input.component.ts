@@ -13,10 +13,15 @@ export class TextInputComponent {
   @Input({
     required: true,
   })
-  placeholder = '';
+  id: string = '';
 
   @Input({
     required: true,
   })
-  label = '';
+  placeholder: string = '';
+
+  @Input({
+    required: true,
+  })
+  label: string = '';
 }
