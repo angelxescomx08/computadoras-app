@@ -15,9 +15,25 @@ describe('ComputersService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return a computer by id', () => {
+  it('should return be undefined if id does not exists', () => {
     const computer = service.getComputerById('1', '[]');
     expect(computer).toBeUndefined();
+  });
+
+  it('should return a computer by id', () => {
+    const computer: Computer = {
+      id: '1',
+      brand: 'HP',
+      price: 1000,
+      RAMCapacity: '8GB',
+      storageCapacity: '1TB',
+      storageType: 'HDD',
+    };
+    const computerById = service.getComputerById(
+      '1',
+      JSON.stringify([computer])
+    );
+    expect(computerById).toEqual(computer);
   });
 
   it('should return an empty array', () => {
