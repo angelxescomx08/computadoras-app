@@ -1,18 +1,24 @@
-import { Injectable } from '@angular/core';
-import { Option } from '../../shared/select-input/interfaces/select-input.interface';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComputersService {
-  private brands = ['HP', 'Dell', 'Levono', 'Apple'];
+  private brands = signal(['HP', 'Dell', 'Levono', 'Apple']);
+  private storageType = signal(['HDD', 'SSD']);
+  private RAMCapacity = signal(['8GB', '16GB', '32GB', '64GB']);
 
   constructor() {}
 
-  getBrands(): Option[] {
-    return this.brands.map((brand) => ({
-      name: brand,
-      value: brand.toLowerCase(),
-    }));
+  getBrands() {
+    return this.brands;
+  }
+
+  getStorageTypes() {
+    return this.storageType;
+  }
+
+  getRAMCapacities() {
+    return this.RAMCapacity;
   }
 }

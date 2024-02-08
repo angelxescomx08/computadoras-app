@@ -1,30 +1,59 @@
-<!-- component -->
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-  <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-auto">
-    <h2 class="text-2xl font-semibold mb-4">Agregar computadora</h2>
+<div class="flex w-full h-screen justify-center items-center bg-slate-100">
+  <form class="bg-white w-96 rounded-md shadow-lg p-3">
+    <h2>Agregar computadora</h2>
 
-    <form action="#" method="POST">
-      <div class="grid gap-4">
-        <app-select-input [options]="brands" />
+    <mat-form-field class="w-full">
+      <mat-label>Precio</mat-label>
+      <input matInput placeholder="20000.00" type="number" />
+      @if (true) {
+      <mat-error>Error</mat-error>
+      }
+    </mat-form-field>
 
-        <app-text-input id="precio" label="Precio" placeholder="20000.00" />
-
-        <app-text-input
-          id="capacidad-almacenamiento"
-          label="Capacidad de almacenamiento"
-          placeholder="1TB"
-        />
+    <div class="grid grid-cols-12 gap-2">
+      <div class="col-span-6">
+        <mat-form-field class="w-full">
+          <mat-label>Marca</mat-label>
+          <mat-select>
+            @for (brand of brands(); track brand) {
+            <mat-option [value]="brand">{{ brand }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
       </div>
 
-      <!-- Bouton d'inscription -->
-      <div class="mt-6">
-        <button
-          type="submit"
-          class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        >
-          Guardar
-        </button>
+      <div class="col-span-6">
+        <mat-form-field class="w-full">
+          <mat-label>Tipo de almacenamiento</mat-label>
+          <mat-select>
+            @for (type of storageTypes(); track type) {
+            <mat-option [value]="type">{{ type }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
       </div>
-    </form>
-  </div>
-</body>
+    </div>
+
+    <div class="grid grid-cols-12 gap-2">
+      <div class="col-span-6">
+        <mat-form-field class="w-full">
+          <mat-label>Almacenamiento</mat-label>
+          <input matInput placeholder="1TB" type="number" />
+          @if (true) {
+          <mat-error>Error</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="col-span-6">
+        <mat-form-field class="w-full">
+          <mat-label>Capacidad de la RAM</mat-label>
+          <mat-select>
+            @for (RAMCapacity of RAMCapacities(); track RAMCapacity) {
+            <mat-option [value]="RAMCapacity">{{ RAMCapacity }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
