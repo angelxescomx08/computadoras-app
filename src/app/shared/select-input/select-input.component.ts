@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Option } from './interfaces/select-input.interface';
 
 @Component({
   selector: 'app-select-input',
@@ -9,4 +10,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './select-input.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectInputComponent {}
+export class SelectInputComponent {
+  @Input({
+    required: true,
+  })
+  options: Option[] = [];
+}
