@@ -2,17 +2,17 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  AfterViewInit,
   ViewChild,
   signal,
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ComputersService } from '../../services/computers.service';
 import { Computer } from '../../interfaces/computer.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-computers',
@@ -46,7 +46,10 @@ export class ComputersComponent {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
-  constructor(public computersService: ComputersService) {}
+  constructor(
+    public computersService: ComputersService,
+    private router: Router
+  ) {}
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -55,5 +58,9 @@ export class ComputersComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  redirect(row: Computer) {
+    this.router.navigateByUrl(`/computers/new?id=${row.id}`);
   }
 }

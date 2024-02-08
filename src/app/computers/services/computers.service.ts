@@ -27,6 +27,7 @@ export class ComputersService {
 
   createComputerByFormGroup(form: FormGroup): Computer {
     const computer: Computer = {
+      id: crypto.randomUUID(),
       brand: form.value.brand!,
       price: form.value.price!,
       RAMCapacity: form.value.RAMCapacity!,
