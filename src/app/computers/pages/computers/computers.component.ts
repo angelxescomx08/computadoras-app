@@ -64,6 +64,6 @@ export class ComputersComponent {
   }
 
   redirect(row: Computer) {
-    this.router.navigateByUrl(`/computers/new?id=${row.id}`);
+    this.router.navigateByUrl(`/Computers/${row.id}`);
   }
 }

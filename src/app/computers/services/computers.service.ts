@@ -38,13 +38,8 @@ export class ComputersService {
   }
 
   addComputer(form: FormGroup) {
-    const computersString = localStorage.getItem('computers');
+    const computers = this.getComputers();
     const computer = this.createComputerByFormGroup(form);
-    if (!computersString) {
-      localStorage.setItem('computers', JSON.stringify([computer]));
-      return;
-    }
-    const computers: Computer[] = JSON.parse(computersString);
     computers.push(computer);
     localStorage.setItem('computers', JSON.stringify(computers));
     this.snackBarService.openSnackBar('Guardado exitoso.', 'Aceptar');

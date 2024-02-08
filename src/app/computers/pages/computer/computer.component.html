@@ -1,0 +1,105 @@
+<app-main-layout>
+  <div class="w-full h-full flex justify-center items-center">
+    <form
+      class="bg-white w-96 rounded-md shadow-lg p-3 max-w-full"
+      [formGroup]="form"
+      (ngSubmit)="submit()"
+    >
+      <h2>Agregar computadora</h2>
+
+      <mat-form-field class="w-full">
+        <mat-label>Precio</mat-label>
+        <input
+          matInput
+          placeholder="20000.00"
+          type="number"
+          formControlName="price"
+        />
+        @if (form.get('price')?.invalid && form.get('price')?.touched) {
+        <mat-error>El precio es requerido y debe ser mayor que 0</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="grid grid-cols-12 gap-2">
+        <div class="col-span-6">
+          <mat-form-field class="w-full">
+            <mat-label>Marca</mat-label>
+            <mat-select formControlName="brand">
+              @for (brand of computersService.brands(); track brand) {
+              <mat-option [value]="brand">{{ brand }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col-span-6">
+          <mat-form-field class="w-full">
+            <mat-label>Tipo de almacenamiento</mat-label>
+            <mat-select formControlName="storageType">
+              @for (type of computersService.storageTypes(); track type) {
+              <mat-option [value]="type">{{ type }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-2">
+        <div class="col-span-6">
+          <mat-form-field class="w-full">
+            <mat-label>Almacenamiento</mat-label>
+            <input
+              matInput
+              placeholder="1TB"
+              type="text"
+              formControlName="storageCapacity"
+            />
+            @if (form.get('storageCapacity')?.invalid &&
+            form.get('storageCapacity')?.touched) {
+            <mat-error>Ingresa al menos 3 caracteres</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <div class="col-span-6">
+          <mat-form-field class="w-full">
+            <mat-label>Capacidad de la RAM</mat-label>
+            <mat-select formControlName="RAMCapacity">
+              @for (RAMCapacity of computersService.RAMCapacities(); track
+              RAMCapacity) {
+              <mat-option [value]="RAMCapacity">{{ RAMCapacity }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-12 gap-2 mb-4">
+        <div class="col-span-6">
+          <button
+            class="w-full"
+            mat-raised-button
+            type="button"
+            (click)="computersService.clearForm(form)"
+          >
+            Limpiar
+          </button>
+        </div>
+        <div class="col-span-6">
+          <button
+            (click)="computersService.cancelAction()"
+            class="w-full"
+            mat-raised-button
+            color="warn"
+            type="button"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+
+      <button class="w-full" mat-raised-button color="primary" type="submit">
+        Guardar
+      </button>
+    </form>
+  </div>
+</app-main-layout>

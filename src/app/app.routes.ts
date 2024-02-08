@@ -29,6 +29,13 @@ export const routes: Routes = [
               ),
           },
           {
+            path: ':id',
+            loadComponent: () =>
+              import('./computers/pages/computer/computer.component').then(
+                (c) => c.ComputerComponent
+              ),
+          },
+          {
             path: '**',
             redirectTo: '/computers',
           },
