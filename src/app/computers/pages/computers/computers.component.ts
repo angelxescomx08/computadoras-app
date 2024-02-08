@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ComputersService } from '../../services/computers.service';
 import { Computer } from '../../interfaces/computer.interface';
 import { Router } from '@angular/router';
+import { MainLayoutComponent } from '../../../shared/layouts/MainLayout/MainLayout.component';
 
 @Component({
   selector: 'app-computers',
@@ -24,6 +25,7 @@ import { Router } from '@angular/router';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    MainLayoutComponent,
   ],
   templateUrl: `./computers.component.html`,
   styleUrl: './computers.component.css',

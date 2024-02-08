@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ComputersService } from '../../services/computers.service';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MainLayoutComponent } from '../../../shared/layouts/MainLayout/MainLayout.component';
 
 @Component({
   selector: 'app-new',
@@ -23,6 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatSelectModule,
     MatButtonModule,
+    MainLayoutComponent,
   ],
   templateUrl: `./new.component.html`,
   styleUrl: './new.component.css',
