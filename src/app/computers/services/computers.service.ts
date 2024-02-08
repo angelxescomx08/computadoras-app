@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class ComputersService {
-  public brands = signal(['HP', 'Dell', 'Levono', 'Apple']);
+  public brands = signal(['HP', 'Dell', 'Lenovo', 'Apple']);
   public storageTypes = signal(['HDD', 'SSD']);
   public RAMCapacities = signal(['8GB', '16GB', '32GB', '64GB']);
 

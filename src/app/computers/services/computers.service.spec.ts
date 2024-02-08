@@ -111,4 +111,26 @@ describe('ComputersService', () => {
       storageType: null,
     });
   });
+
+  it('should have all properties in brands', () => {
+    const brands = service.brands;
+    expect(brands()).toContain('HP');
+    expect(brands()).toContain('Dell');
+    expect(brands()).toContain('Lenovo');
+    expect(brands()).toContain('Apple');
+  });
+
+  it('should have all properties in RAMCapacities', () => {
+    const RAMCapacities = service.RAMCapacities;
+    expect(RAMCapacities()).toContain('8GB');
+    expect(RAMCapacities()).toContain('16GB');
+    expect(RAMCapacities()).toContain('32GB');
+    expect(RAMCapacities()).toContain('64GB');
+  });
+
+  it('should have all properties in storageTypes', () => {
+    const storageTypes = service.storageTypes;
+    expect(storageTypes()).toContain('HDD');
+    expect(storageTypes()).toContain('SSD');
+  });
 });
