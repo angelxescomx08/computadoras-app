@@ -1,0 +1,25 @@
+<!-- component -->
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded shadow-md max-w-md w-full mx-auto">
+    <h2 class="text-2xl font-semibold mb-4">Agregar computadora</h2>
+
+    <form action="#" method="POST">
+      <div class="grid gap-4">
+        <app-select-input />
+        <app-text-input label="Precio" placeholder="20000.00" />
+
+        <app-text-input label="Capacidad de almacenamiento" placeholder="1TB" />
+      </div>
+
+      <!-- Bouton d'inscription -->
+      <div class="mt-6">
+        <button
+          type="submit"
+          class="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
