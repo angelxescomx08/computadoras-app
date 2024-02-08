@@ -1,8 +1,13 @@
-<!--(keyup)="applyFilter($event)"-->
+<!---->
 <div class="w-full p-4">
   <mat-form-field class="w-full">
-    <mat-label>Filter</mat-label>
-    <input matInput placeholder="Ex. Mia" #input />
+    <mat-label>Filtrar</mat-label>
+    <input
+      matInput
+      placeholder="Buscar..."
+      (keyup)="applyFilter($event)"
+      #input
+    />
   </mat-form-field>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
