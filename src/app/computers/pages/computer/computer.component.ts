@@ -96,7 +96,6 @@ export class ComputerComponent implements OnInit {
       this.id(),
       localStorageResult
     );
-    this.computersService.clearForm(this.form);
     this.snackBarService.openSnackBar('Guardado exitoso.', 'Aceptar');
   }
 }
